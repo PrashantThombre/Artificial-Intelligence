@@ -1,6 +1,8 @@
 import csv
 import operator
 import math
+import matplotlib.pyplot as plt
+import copy
 
 def getdata():
     #with open("D:\Downloads\KNN Dataset\\banana-10-1tra.dat",'rb') as f:
@@ -37,7 +39,7 @@ def getdata2():
             j = i.replace(' ', '')
             tempList.append(j)
         train_data.append(tempList)
-    print (train_data)
+    #print (train_data)
 
     with open("D:\Downloads\KNN_Dataset\\banana-10-1tst.dat", 'rb') as f:
         reader = csv.reader(f)
@@ -49,22 +51,19 @@ def getdata2():
             j = i.replace(' ', '')
             tempList.append(j)
         test_data.append(tempList)
-    print (test_data)
+    #print (test_data)
     return train_data,test_data
 
 def euclideanDist(x, xi):
     d = 0.0
     for i in range(len(x) - 1):
-        d += pow((float(x[i]) - float(xi[i])), 2)  # euclidean distance
+        d += pow((float(x[i]) - float(xi[i])),2)  # euclidean distance
     return d
 
 
 # KNN prediction and model training
 def knn_predict(test_data, train_data, k_value):
-    print (len(train_data))
-    print (len(test_data))
-    for i in test_data:
-        print (i)
+     for i in test_data:
         eu_Distance = []
         knn = []
         class1 = 0
@@ -96,9 +95,21 @@ def accuracy(test_data):
     return accuracy
 
 
-
-train_dataset, test_dataset = getdata2()
-K = 5
-knn_predict(test_dataset, train_dataset, K)
-print test_dataset
-print "Accuracy : ",accuracy(test_dataset)
+x_list = []
+y_list = []
+train_data, test_data = getdata2()
+for K in xrange(1,52,2):
+    print "K = ",K
+    train_dataset = copy.deepcopy(train_data)
+    test_dataset = copy.deepcopy(test_data)
+    knn_predict(test_dataset, train_dataset, K)
+    #print test_dataset
+    accuracy_value = accuracy(test_dataset)
+    print "Accuracy : ",accuracy_value
+    x_list.append(K)
+    y_list.append(accuracy_value)
+print x_list
+print y_list
+plt.plot(x_list,y_list)
+plt.axis([1,K,80,100])
+plt.show()
