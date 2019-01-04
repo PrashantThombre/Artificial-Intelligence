@@ -1,6 +1,10 @@
 # CS256
 CS 256: Topics in Artificial Intelligence - Self Learning, Class Assignments, and Projects Related to Machine Learning and AI
 
+CS 256: Topics in Artificial Intelligence
+- Self Learning
+- Class Assignments
+- Projects Related to Machine Learning and AI
 
 ## Extra Information:
 The aim is to understand KNN algorithm thoroughly using simple datasets
@@ -43,3 +47,4 @@ Or simply use the following steps:
     -->jupyter notebook
 		
   It'll start the jupyter server on http://localhost:8888/tree#
+
